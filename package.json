@@ -4,6 +4,7 @@
   "description": "backend gidas",
   "main": "server.js",
   "scripts": {
+    "build": "",
     "start": "SET NODE_ENV=production & node server.js",
     "dev": "SET NODE_ENV=development & nodemon server.js"
   },
