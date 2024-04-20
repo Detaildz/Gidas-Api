@@ -18,12 +18,7 @@ app.get('/', (req, res) => {
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_DB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      auth: {
-        username: darjuszukovski,
-        password: process.env.PASSWORD,
-      },
+      dbName: 'Gidas', // Specify the database name here
     });
     console.log('Database connected');
   } catch (err) {
