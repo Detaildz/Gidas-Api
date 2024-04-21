@@ -9,6 +9,7 @@ router.post('/', async (req, res) => {
   try {
     const {
       customId,
+      category,
       week,
       carrier,
       truckNumber,
@@ -25,6 +26,7 @@ router.post('/', async (req, res) => {
 
     const newTruck = new Truck({
       customId,
+      category,
       week,
       carrier,
       truckNumber,

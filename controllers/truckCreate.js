@@ -13,6 +13,7 @@ async function truckCreate(props) {
     // If no existing document found, create and save the new truck
     const newTruck = new Truck({
       customId: props.customId,
+      category: props.category,
       ...props,
     });
 

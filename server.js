@@ -12,9 +12,11 @@ app.use(express.json());
 
 app.use('/trucks/', require('./routes/truckGetter.routes'));
 app.use('/trucks', require('./routes/truckSetter.routes'));
+app.use('/users', require('./routes/user.routes'));
 app.get('/', (req, res) => {
-  res.send('Hello Backend!');
+  res.send('IT WORKSSSSSS!');
 });
+
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_DB_URI, {
