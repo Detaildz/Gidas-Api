@@ -36,6 +36,13 @@ app.get('/', (req, res) => {
   res.send('IT WORKS!');
 });
 
+io.use((socket, next) => {
+  socket.handshake.headers.origin = socket.handshake.headers.origin || '*';
+  socket.handshake.headers['Access-Control-Allow-Origin'] =
+    socket.handshake.headers.origin;
+  next();
+});
+
 // WebSocket event handlers
 const io = require('socket.io')(server, {
   pingTimeout: 60000,
