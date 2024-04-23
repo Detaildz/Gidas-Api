@@ -40,7 +40,7 @@ app.get('/', (req, res) => {
 const io = require('socket.io')(server, {
   pingTimeout: 60000,
   cors: {
-    origin: 'https://gidas-api.vercel.app',
+    origin: 'https://master--mano-gidas.netlify.app',
     methods: ['GET', 'POST'],
   },
 });
