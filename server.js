@@ -4,10 +4,10 @@ const cors = require('cors');
 const http = require('http');
 const socketIo = require('socket.io');
 require('dotenv').config();
-
+const proxy = require('./proxy');
 const app = express();
 const PORT = process.env.PORT || 3000;
-
+proxy(app);
 // MongoDB connection
 const connectDB = async () => {
   try {
