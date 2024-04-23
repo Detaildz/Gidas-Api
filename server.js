@@ -44,16 +44,16 @@ io.use((socket, next) => {
 });
 
 // WebSocket event handlers
-const io = require('socket.io')(server, {
-  pingTimeout: 60000,
-  cors: {
-    origin: [
-      'https://gidas-api.vercel.app',
-      'https://master--mano-gidas.netlify.app',
-    ],
-    methods: ['GET', 'POST'],
-  },
-});
+// const io = require('socket.io')(server, {
+//   pingTimeout: 60000,
+//   cors: {
+//     origin: [
+//       'https://gidas-api.vercel.app',
+//       'https://master--mano-gidas.netlify.app',
+//     ],
+//     methods: ['GET', 'POST'],
+//   },
+// });
 
 io.on('connection', (socket) => {
   console.log('connected:', socket.id);
