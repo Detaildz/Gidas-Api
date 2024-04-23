@@ -15,7 +15,7 @@ const io = socketIo(server, {
   pingTimeout: 60000,
   cors: {
     origin: [
-      'wws://gidas-api.vercel.app/',
+      'https://gidas-api.vercel.app/',
       'https://master--mano-gidas.netlify.app/',
     ],
     methods: ['GET', 'POST'],
