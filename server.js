@@ -9,7 +9,16 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 const server = http.createServer(app);
-const io = socketIo(server);
+const io = socketIo(server, {
+  pingTimeout: 60000,
+  cors: {
+    origin: [
+      'https://gidas-api.vercel.app',
+      'https://master--mano-gidas.netlify.app',
+    ],
+    methods: ['GET', 'POST'],
+  },
+});
 // MongoDB connection
 const connectDB = async () => {
   try {
