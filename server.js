@@ -23,6 +23,12 @@ const connectDB = async () => {
 
 connectDB();
 
+let baseURL;
+
+process.env.NODE_ENV === 'production'
+  ? (baseURL = 'https://gidas-api.vercel.app/')
+  : (baseURL = 'http://localhost:3000');
+
 const server = http.createServer(app);
 
 app.use(cors());
@@ -40,7 +46,7 @@ app.get('/', (req, res) => {
 const io = require('socket.io')(server, {
   pingTimeout: 60000,
   cors: {
-    origin: 'http://localhost:5173',
+    origin: [baseURL],
     methods: ['GET', 'POST'],
   },
 });
@@ -58,5 +64,5 @@ io.on('connection', (socket) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
+  console.log(`Server listening on port ${process.env.PORT}`);
 });
