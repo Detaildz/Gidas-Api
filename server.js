@@ -19,6 +19,7 @@ const io = socketIo(server, {
     ],
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization'],
+    transports: ['websocket'],
   },
 });
 // MongoDB connection
