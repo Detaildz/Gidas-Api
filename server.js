@@ -12,6 +12,14 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   pingTimeout: 60000,
+  cors: {
+    origin: [
+      'https://gidas-api.vercel.app',
+      'https://master--mano-gidas.netlify.app',
+    ],
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  },
 });
 // MongoDB connection
 const connectDB = async () => {
@@ -28,14 +36,7 @@ const connectDB = async () => {
 
 connectDB();
 
-app.use(
-  cors({
-    origin: [
-      'https://gidas-api.vercel.app',
-      'https://master--mano-gidas.netlify.app',
-    ],
-  })
-);
+app.use(cors());
 app.use(express.json());
 
 app.use('/trucks', require('./routes/truckGetter.routes'));
