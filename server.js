@@ -18,7 +18,7 @@ const io = socketIo(server, {
       'https://master--mano-gidas.netlify.app',
     ],
     methods: ['GET', 'POST'],
-    accessControlAllowHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
   },
 });
 // MongoDB connection
