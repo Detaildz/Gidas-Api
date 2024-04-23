@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const http = require('http');
 const socketIo = require('socket.io');
+const { access } = require('fs');
 require('dotenv').config();
 
 const PORT = process.env.PORT || 3000;
@@ -17,6 +18,7 @@ const io = socketIo(server, {
       'https://master--mano-gidas.netlify.app',
     ],
     methods: ['GET', 'POST'],
+    accessControlAllowHeaders: ['Content-Type', 'Authorization'],
   },
 });
 // MongoDB connection
