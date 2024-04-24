@@ -11,13 +11,16 @@ const app = express();
 
 const server = http.createServer(app);
 
+let baseURL;
+
+process.env.NODE_ENV === 'production'
+  ? (baseURL = 'https://gidas-api.vercel.app')
+  : (baseURL = 'http://localhost:5173');
+
 const io = socketIo(server, {
   pingTimeout: 60000,
   cors: {
-    origin: [
-      'https://gidas-api.vercel.app/',
-      'https://master--mano-gidas.netlify.app/',
-    ],
+    origin: baseURL,
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     transports: ['websocket'],
@@ -29,6 +32,7 @@ const connectDB = async () => {
     await mongoose.connect(process.env.MONGO_DB_URI, {
       dbName: 'Gidas',
     });
+    console.log();
     console.log('Database connected');
   } catch (err) {
     console.error(err.message);
