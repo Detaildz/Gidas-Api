@@ -47,6 +47,7 @@ const io = socketIo(server, {
     origin: 'https://gidas.vercel.app',
     methods: ['GET', 'POST'],
     transports: ['websocket', 'polling'],
+    credentials: true,
   },
   allowEIO3: true,
 });
