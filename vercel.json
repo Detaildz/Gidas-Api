@@ -6,7 +6,7 @@
       "src": "/(.*)",
       "dest": "server.js",
       "headers": {
-        "Access-Control-Allow-Origin": "https://gidas.vercel.app/"
+        "Access-Control-Allow-Origin": "https://gidas.vercel.app"
       }
     }
   ]
