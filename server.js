@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const cors = require('cors');
-const http = require('http');
+// const http = require('http');
 const socketIo = require('socket.io');
 
 require('dotenv').config();
@@ -9,17 +9,8 @@ require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 const app = express();
 
-const server = http.createServer(app);
+// const server = http.createServer(app);
 
-const io = socketIo(server, {
-  pingTimeout: 60000,
-  cors: {
-    origin: ['https://gidas.vercel.app', 'http://localhost:5173'],
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    transports: ['websocket'],
-  },
-});
 // MongoDB connection
 const connectDB = async () => {
   try {
@@ -47,6 +38,20 @@ app.get('/', (req, res) => {
   res.send('IT WORKS!');
 });
 
+const server = app.listen(PORT, () => {
+  console.log(`Server listening on port ${process.env.PORT}`);
+});
+
+const io = socketIo(server, {
+  pingTimeout: 60000,
+  cors: {
+    origin: ['https://gidas.vercel.app', 'http://localhost:5173'],
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    transports: ['websocket'],
+  },
+});
+
 io.use((socket, next) => {
   socket.handshake.headers.origin = socket.handshake.headers.origin || '*';
   socket.handshake.headers['Access-Control-Allow-Origin'] =
@@ -64,8 +69,4 @@ io.on('connection', (socket) => {
   socket.on('inputChange', (data) => {
     socket.broadcast.emit('inputChange', data);
   });
-});
-
-server.listen(PORT, () => {
-  console.log(`Server listening on port ${process.env.PORT}`);
 });
