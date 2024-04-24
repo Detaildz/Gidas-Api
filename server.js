@@ -17,7 +17,7 @@ const connectDB = async () => {
     await mongoose.connect(process.env.MONGO_DB_URI, {
       dbName: 'Gidas',
     });
-    console.log();
+
     console.log('Database connected');
   } catch (err) {
     console.error(err.message);
@@ -50,13 +50,6 @@ const io = socketIo(server, {
     allowedHeaders: ['Content-Type', 'Authorization'],
     transports: ['websocket'],
   },
-});
-
-io.use((socket, next) => {
-  socket.handshake.headers.origin = socket.handshake.headers.origin || '*';
-  socket.handshake.headers['Access-Control-Allow-Origin'] =
-    socket.handshake.headers.origin;
-  next();
 });
 
 io.on('connection', (socket) => {
