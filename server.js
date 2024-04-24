@@ -46,10 +46,9 @@ const io = socketIo(server, {
   cors: {
     pingTimeout: 60000,
     cors: {
-      origin: 'https://gidas.vercel.app',
+      origin: '*',
       methods: ['GET', 'POST'],
     },
-    allowEIO3: true,
   },
 });
 
