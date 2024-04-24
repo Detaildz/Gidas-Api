@@ -14,7 +14,7 @@ const server = http.createServer(app);
 const io = socketIo(server, {
   pingTimeout: 60000,
   cors: {
-    origin: ['https://gidas.vercel.app/', 'http://localhost:5173'],
+    origin: ['https://gidas.vercel.app', 'http://localhost:5173'],
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     transports: ['websocket'],
@@ -53,18 +53,6 @@ io.use((socket, next) => {
     socket.handshake.headers.origin;
   next();
 });
-
-// WebSocket event handlers
-// const io = require('socket.io')(server, {
-//   pingTimeout: 60000,
-//   cors: {
-//     origin: [
-//       'https://gidas-api.vercel.app',
-//       'https://master--mano-gidas.netlify.app',
-//     ],
-//     methods: ['GET', 'POST'],
-//   },
-// });
 
 io.on('connection', (socket) => {
   console.log('connected:', socket.id);
