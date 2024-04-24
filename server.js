@@ -43,12 +43,9 @@ const server = app.listen(PORT, () => {
 });
 
 const io = socketIo(server, {
-  pingTimeout: 60000,
   cors: {
     origin: 'https://gidas.vercel.app',
     methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    transports: ['websocket'],
   },
 });
 
