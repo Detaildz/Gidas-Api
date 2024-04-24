@@ -27,7 +27,36 @@ const connectDB = async () => {
 
 connectDB();
 
-app.use(cors());
+let baseURL;
+
+process.env.NODE_ENV === 'production'
+  ? (baseURL = 'https://gidas.vercel.app')
+  : (baseURL = 'http://localhost:5173');
+
+const server = app.listen(process.env.PORT, () => {
+  console.log(`Server is listening on port ${process.env.PORT}`);
+});
+
+const io = require('socket.io')(server, {
+  pingTimeout: 60000,
+  cors: {
+    origin: baseURL,
+    methods: ['GET', 'POST'],
+  },
+});
+
+app.use(
+  cors({
+    origin: [baseURL],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+  })
+);
+
+app.options('*', cors());
+
+app.options('*', cors());
 app.use(express.json());
 
 app.use('/trucks', require('./routes/truckGetter.routes'));
@@ -38,19 +67,7 @@ app.get('/', (req, res) => {
   res.send('IT WORKS!');
 });
 
-const server = app.listen(PORT, () => {
-  console.log(`Server listening on port ${process.env.PORT}`);
-});
-
-const io = socketIo(server, {
-  cors: {
-    pingTimeout: 60000,
-    cors: {
-      origin: '*',
-      methods: ['GET', 'POST'],
-    },
-  },
-});
+// Socket io
 
 io.on('connection', (socket) => {
   console.log('connected:', socket.id);
