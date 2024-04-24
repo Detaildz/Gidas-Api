@@ -14,7 +14,7 @@ const server = http.createServer(app);
 let baseURL;
 
 process.env.NODE_ENV === 'production'
-  ? (baseURL = 'https://gidas-api.vercel.app')
+  ? (baseURL = 'https://master--mano-gidas.netlify.app/')
   : (baseURL = 'http://localhost:5173');
 
 const io = socketIo(server, {
