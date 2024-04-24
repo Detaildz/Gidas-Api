@@ -44,12 +44,13 @@ const server = app.listen(PORT, () => {
 
 const io = socketIo(server, {
   cors: {
-    origin: 'https://gidas.vercel.app',
-    methods: ['GET', 'POST'],
-    transports: ['websocket', 'polling'],
-    credentials: true,
+    pingTimeout: 60000,
+    cors: {
+      origin: 'https://gidas.vercel.app',
+      methods: ['GET', 'POST'],
+    },
+    allowEIO3: true,
   },
-  allowEIO3: true,
 });
 
 io.on('connection', (socket) => {
