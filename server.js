@@ -37,22 +37,15 @@ const server = app.listen(process.env.PORT, () => {
   console.log(`Server is listening on port ${process.env.PORT}`);
 });
 
-const io = require('socket.io')(server, {
-  pingTimeout: 60000,
-  cors: {
-    origin: baseURL,
-    methods: ['GET', 'POST'],
-    credentials: true,
-    transports: ['websocket', 'polling'],
-  },
-});
-
-io.engine.on('connection_error', (err) => {
-  console.log(err.req); // the request object
-  console.log(err.code); // the error code, for example 1
-  console.log(err.message); // the error message, for example "Session ID unknown"
-  console.log(err.context); // some additional error context
-});
+// const io = require('socket.io')(server, {
+//   pingTimeout: 60000,
+//   cors: {
+//     origin: baseURL,
+//     methods: ['GET', 'POST'],
+//     credentials: true,
+//     transports: ['websocket', 'polling'],
+//   },
+// });
 
 app.use(
   cors({
@@ -76,14 +69,14 @@ app.get('/', (req, res) => {
 
 // Socket io
 
-io.on('connection', (socket) => {
-  console.log('connected:', socket.id);
+// io.on('connection', (socket) => {
+//   console.log('connected:', socket.id);
 
-  socket.on('message', (data) => {
-    socket.broadcast.emit('message', data);
-  });
+//   socket.on('message', (data) => {
+//     socket.broadcast.emit('message', data);
+//   });
 
-  socket.on('inputChange', (data) => {
-    socket.broadcast.emit('inputChange', data);
-  });
-});
+//   socket.on('inputChange', (data) => {
+//     socket.broadcast.emit('inputChange', data);
+//   });
+// });
