@@ -42,6 +42,8 @@ const io = require('socket.io')(server, {
   cors: {
     origin: baseURL,
     methods: ['GET', 'POST'],
+    credentials: true,
+    transports: ['websocket', 'polling'],
   },
 });
 
@@ -50,7 +52,6 @@ app.use(
     origin: [baseURL],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
   })
 );
 
