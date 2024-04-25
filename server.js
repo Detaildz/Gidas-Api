@@ -56,7 +56,6 @@ app.use(
 
 app.options('*', cors());
 
-app.options('*', cors());
 app.use(express.json());
 
 app.use('/trucks', require('./routes/truckGetter.routes'));
