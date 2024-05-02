@@ -2,11 +2,12 @@ const mongoose = require('mongoose');
 
 const truckSchema = new mongoose.Schema({
   customId: { type: Number, unique: true, required: true },
-  week: { type: Number },
+  week: { type: Number, required: true },
   category: {
     type: String,
     required: true,
   },
+  country: { type: String, required: true },
   carrier: { type: String },
   truckNumber: { type: String },
   price: { type: String },

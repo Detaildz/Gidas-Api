@@ -2,7 +2,6 @@ const Truck = require('../models/truckModel');
 
 async function truckCreate(props) {
   try {
-    // Check if a document with the same customId already exists
     const existingTruck = await Truck.findOne({ customId: props.customId });
     if (existingTruck) {
       throw new Error(
@@ -10,19 +9,18 @@ async function truckCreate(props) {
       );
     }
 
-    // If no existing document found, create and save the new truck
     const newTruck = new Truck({
-      customId: props.customId,
-      category: props.category,
       ...props,
     });
 
     await newTruck.save();
 
     console.log('Truck created:', newTruck);
+
     return newTruck;
   } catch (error) {
     console.error('Error creating truck:', error);
+
     throw error;
   }
 }

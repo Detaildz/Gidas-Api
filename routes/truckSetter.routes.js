@@ -7,42 +7,7 @@ const router = Router();
 
 router.post('/', async (req, res) => {
   try {
-    const {
-      customId,
-      category,
-      week,
-      carrier,
-      truckNumber,
-      price,
-      monday,
-      tuesday,
-      wednesday,
-      thursday,
-      friday,
-      saturday,
-      sunday,
-      inputsDisabled,
-    } = req.body;
-
-    const newTruck = new Truck({
-      customId,
-      category,
-      week,
-      carrier,
-      truckNumber,
-      price,
-      monday,
-      tuesday,
-      wednesday,
-      thursday,
-      friday,
-      saturday,
-      sunday,
-      inputsDisabled,
-    });
-
-    await newTruck.save();
-
+    const newTruck = await truckCreate(req.body);
     res.status(201).json(newTruck);
   } catch (error) {
     console.log('Error:', error.message);
